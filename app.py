@@ -2,14 +2,13 @@ from dash import Dash, html, dcc, callback, Input, Output
 import numpy as np 
 import pandas as pd 
 import plotly.express as px
+import dash_bootstrap_components as dbc
 
-app = Dash(__name__)
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.title = "MCM7183 Exercise 3"
 server = app.server
 
 df = pd.read_csv("https://raw.githubusercontent.com/wenjiun/MCM7183Exercise3/main/assets/gdp_1960_2020.csv")
-
-
 
 image_path = 'assets/logo-mmu.png'
 
@@ -25,7 +24,7 @@ app.layout = [html.H1('MCM7183 Exercise 3'),
     Output('graph-scatter', 'figure'),
     Output('graph-pie', 'figure'),
     Input('dropdown-country', 'value'),
-    Input('dropdown-year', 'value'),
+    Input('dropdown-year', 'value')
 )
 def update_graph(country_selected, year_selected):
     subset_Country = df[df['country'].isin([country_selected])]
@@ -43,6 +42,8 @@ def update_graph(country_selected, year_selected):
     fig2 = px.pie(pie_df,values="GDP",names="Continent")
 
     return fig, fig2
+
+
 
 
 if __name__ == '__main__':
