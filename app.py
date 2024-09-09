@@ -14,6 +14,7 @@ image_path = 'assets/logo-mmu.png'
 
 app.layout = [html.H1('MCM7183 Exercise 3'), 
               html.Img(src=image_path), 
+              html.Div(id='debug'),
               dcc.Dropdown(['Malaysia', 'Indonesia', 'China'], 'Malaysia', id='dropdown-country'),
               dcc.Graph(id="graph-scatter"), 
               dcc.Dropdown([{'label':'2020', 'value':2020}, {'label':'2010', 'value':2010}, 
@@ -23,6 +24,7 @@ app.layout = [html.H1('MCM7183 Exercise 3'),
 @callback(
     Output('graph-scatter', 'figure'),
     Output('graph-pie', 'figure'),
+    Output('debug', 'children'),
     Input('dropdown-country', 'value'),
     Input('dropdown-year', 'value')
 )
@@ -41,7 +43,7 @@ def update_graph(country_selected, year_selected):
     pie_df = {'Continent': mylabels,'GDP': pie_data}
     fig2 = px.pie(pie_df,values="GDP",names="Continent")
 
-    return fig, fig2
+    return fig, fig2, subset_Country
 
 
 
