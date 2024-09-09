@@ -43,7 +43,7 @@ def update_graph(country_selected, year_selected):
     pie_df = {'Continent': mylabels,'GDP': pie_data}
     fig2 = px.pie(pie_df,values="GDP",names="Continent")
 
-    return fig, fig2, subset_Country
+    return fig, fig2, subset_Country.to_string()
 
 
 
