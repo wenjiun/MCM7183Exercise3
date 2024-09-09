@@ -41,6 +41,7 @@ def update_graph(country_selected, year_selected):
     mylabels = ["Asia", "Africa", "America", "Europe","Oceania"]
     pie_df = {'Continent': mylabels,'GDP': pie_data}
     fig2 = px.pie(pie_df,values="GDP",names="Continent")
+    fig2.update_traces(sort=False) 
 
     return fig, fig2
 
